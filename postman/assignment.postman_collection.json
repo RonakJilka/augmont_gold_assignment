@@ -1,0 +1,449 @@
+{
+  "info": {
+    "name": "Assignment API",
+    "_postman_id": "b4a3a1f0-0000-4000-a000-000000000001",
+    "description": "Node/Express/Prisma/BullMQ backend. Import, run Auth → Login to auto-capture the JWT into {{token}}.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    { "key": "baseUrl", "value": "http://localhost:3000/api/v1" },
+    { "key": "token", "value": "" },
+    { "key": "categoryUniqueId", "value": "" },
+    { "key": "productUniqueId", "value": "" },
+    { "key": "jobId", "value": "" }
+  ],
+  "item": [
+    {
+      "name": "Auth",
+      "item": [
+        {
+          "name": "Register",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": { "raw": "{{baseUrl}}/auth/register", "host": ["{{baseUrl}}"], "path": ["auth", "register"] },
+            "body": { "mode": "raw", "raw": "{\n  \"email\": \"demo@example.com\",\n  \"password\": \"password123\"\n}" },
+            "description": "Creates a new user with bcrypt-hashed password. Returns { user, token }."
+          }
+        },
+        {
+          "name": "Login",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const json = pm.response.json();",
+                  "if (json && json.token) { pm.collectionVariables.set('token', json.token); }"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": { "raw": "{{baseUrl}}/auth/login", "host": ["{{baseUrl}}"], "path": ["auth", "login"] },
+            "body": { "mode": "raw", "raw": "{\n  \"email\": \"demo@example.com\",\n  \"password\": \"password123\"\n}" },
+            "description": "Verifies credentials and returns a JWT. The test script auto-captures the token into {{token}}."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Users",
+      "item": [
+        {
+          "name": "Me",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": { "raw": "{{baseUrl}}/users/me", "host": ["{{baseUrl}}"], "path": ["users", "me"] },
+            "description": "Returns the currently authenticated user."
+          }
+        },
+        {
+          "name": "Update Me",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "url": { "raw": "{{baseUrl}}/users/me", "host": ["{{baseUrl}}"], "path": ["users", "me"] },
+            "body": { "mode": "raw", "raw": "{\n  \"email\": \"demo+updated@example.com\"\n}" },
+            "description": "Updates the currently authenticated user's email/password."
+          }
+        },
+        {
+          "name": "List",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": { "raw": "{{baseUrl}}/users", "host": ["{{baseUrl}}"], "path": ["users"] },
+            "description": "Lists all users (admin-style endpoint, JWT-protected)."
+          }
+        },
+        {
+          "name": "Create",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "url": { "raw": "{{baseUrl}}/users", "host": ["{{baseUrl}}"], "path": ["users"] },
+            "body": { "mode": "raw", "raw": "{\n  \"email\": \"other@example.com\",\n  \"password\": \"password123\"\n}" },
+            "description": "Creates a new user."
+          }
+        },
+        {
+          "name": "Get",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": { "raw": "{{baseUrl}}/users/1", "host": ["{{baseUrl}}"], "path": ["users", "1"] },
+            "description": "Fetch user by numeric id."
+          }
+        },
+        {
+          "name": "Update",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "url": { "raw": "{{baseUrl}}/users/1", "host": ["{{baseUrl}}"], "path": ["users", "1"] },
+            "body": { "mode": "raw", "raw": "{\n  \"password\": \"newpassword123\"\n}" },
+            "description": "Update user email/password by id."
+          }
+        },
+        {
+          "name": "Delete",
+          "request": {
+            "method": "DELETE",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": { "raw": "{{baseUrl}}/users/1", "host": ["{{baseUrl}}"], "path": ["users", "1"] },
+            "description": "Hard-delete a user by id."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Categories",
+      "item": [
+        {
+          "name": "List",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": {
+              "raw": "{{baseUrl}}/categories?search=&page=1&limit=20",
+              "host": ["{{baseUrl}}"],
+              "path": ["categories"],
+              "query": [
+                { "key": "search", "value": "" },
+                { "key": "page", "value": "1" },
+                { "key": "limit", "value": "20" }
+              ]
+            },
+            "description": "Paginated list of active categories, optional case-insensitive search on name."
+          }
+        },
+        {
+          "name": "Create",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const json = pm.response.json();",
+                  "if (json && json.category && json.category.uniqueId) {",
+                  "  pm.collectionVariables.set('categoryUniqueId', json.category.uniqueId);",
+                  "}"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "url": { "raw": "{{baseUrl}}/categories", "host": ["{{baseUrl}}"], "path": ["categories"] },
+            "body": { "mode": "raw", "raw": "{\n  \"name\": \"Electronics\"\n}" },
+            "description": "Creates a category with an auto-generated CAT-XXXXXX uniqueId. Captures it into {{categoryUniqueId}}."
+          }
+        },
+        {
+          "name": "Get",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": {
+              "raw": "{{baseUrl}}/categories/{{categoryUniqueId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["categories", "{{categoryUniqueId}}"]
+            },
+            "description": "Fetch a single category by its public uniqueId."
+          }
+        },
+        {
+          "name": "Update",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/categories/{{categoryUniqueId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["categories", "{{categoryUniqueId}}"]
+            },
+            "body": { "mode": "raw", "raw": "{\n  \"name\": \"Electronics & Gadgets\"\n}" },
+            "description": "Update category name."
+          }
+        },
+        {
+          "name": "Delete",
+          "request": {
+            "method": "DELETE",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": {
+              "raw": "{{baseUrl}}/categories/{{categoryUniqueId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["categories", "{{categoryUniqueId}}"]
+            },
+            "description": "Soft-delete a category (sets deleted_at)."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Products",
+      "item": [
+        {
+          "name": "List",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": {
+              "raw": "{{baseUrl}}/products?page=1&limit=20&sort=price:asc&search=phone&categoryUniqueId={{categoryUniqueId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["products"],
+              "query": [
+                { "key": "page", "value": "1" },
+                { "key": "limit", "value": "20" },
+                { "key": "sort", "value": "price:asc" },
+                { "key": "search", "value": "phone" },
+                { "key": "categoryUniqueId", "value": "{{categoryUniqueId}}" }
+              ]
+            },
+            "description": "Server-side paginated product list. Sort by price asc/desc. Search matches product name OR category name (ILIKE). Optional filter by categoryUniqueId."
+          }
+        },
+        {
+          "name": "Create",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const json = pm.response.json();",
+                  "if (json && json.product && json.product.uniqueId) {",
+                  "  pm.collectionVariables.set('productUniqueId', json.product.uniqueId);",
+                  "}"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": { "raw": "{{baseUrl}}/products", "host": ["{{baseUrl}}"], "path": ["products"] },
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                { "key": "name", "value": "iPhone 15", "type": "text" },
+                { "key": "price", "value": "999.00", "type": "text" },
+                { "key": "categoryUniqueId", "value": "{{categoryUniqueId}}", "type": "text" },
+                { "key": "image", "type": "file", "src": [] }
+              ]
+            },
+            "description": "Creates a product. multipart/form-data: name, price, categoryUniqueId, optional image file. imageUrl is served under /uploads."
+          }
+        },
+        {
+          "name": "Get",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": {
+              "raw": "{{baseUrl}}/products/{{productUniqueId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["products", "{{productUniqueId}}"]
+            },
+            "description": "Fetch a single product by its PRD-XXXXXX uniqueId."
+          }
+        },
+        {
+          "name": "Update",
+          "request": {
+            "method": "PATCH",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": {
+              "raw": "{{baseUrl}}/products/{{productUniqueId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["products", "{{productUniqueId}}"]
+            },
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                { "key": "price", "value": "899.00", "type": "text" }
+              ]
+            },
+            "description": "Update product fields. multipart/form-data so an image can be replaced too."
+          }
+        },
+        {
+          "name": "Delete",
+          "request": {
+            "method": "DELETE",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": {
+              "raw": "{{baseUrl}}/products/{{productUniqueId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["products", "{{productUniqueId}}"]
+            },
+            "description": "Soft-delete a product."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Bulk Upload",
+      "item": [
+        {
+          "name": "Upload",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const json = pm.response.json();",
+                  "if (json && json.jobId) { pm.collectionVariables.set('jobId', json.jobId); }"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": {
+              "raw": "{{baseUrl}}/products/bulk-upload",
+              "host": ["{{baseUrl}}"],
+              "path": ["products", "bulk-upload"]
+            },
+            "body": {
+              "mode": "formdata",
+              "formdata": [{ "key": "file", "type": "file", "src": [] }]
+            },
+            "description": "Accepts CSV or XLSX with columns name,price,categoryUniqueId. Returns 202 with jobId; worker parses (fast-csv / exceljs stream), validates each row, batches createMany(500), and writes failing rows to a per-job errors CSV. Never 504s."
+          }
+        },
+        {
+          "name": "Job Status",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": {
+              "raw": "{{baseUrl}}/jobs/{{jobId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["jobs", "{{jobId}}"]
+            },
+            "description": "Poll job status: queued → processing → completed | failed. Includes progress and per-row counts."
+          }
+        },
+        {
+          "name": "Errors CSV",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": {
+              "raw": "{{baseUrl}}/jobs/{{jobId}}/errors.csv",
+              "host": ["{{baseUrl}}"],
+              "path": ["jobs", "{{jobId}}", "errors.csv"]
+            },
+            "description": "Downloads the per-row errors CSV produced by a bulk_upload job (row,name,price,categoryUniqueId,error)."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Reports",
+      "item": [
+        {
+          "name": "Create Products Report",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const json = pm.response.json();",
+                  "if (json && json.jobId) { pm.collectionVariables.set('jobId', json.jobId); }"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/reports/products",
+              "host": ["{{baseUrl}}"],
+              "path": ["reports", "products"]
+            },
+            "body": { "mode": "raw", "raw": "{\n  \"format\": \"xlsx\"\n}" },
+            "description": "Enqueues a product report export (csv|xlsx). Returns 202 with jobId. Worker uses keyset pagination + streaming writers (fast-csv / exceljs WorkbookWriter) so it can export millions of rows without exhausting memory or timing out the HTTP request."
+          }
+        },
+        {
+          "name": "Job Status",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": {
+              "raw": "{{baseUrl}}/jobs/{{jobId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["jobs", "{{jobId}}"]
+            },
+            "description": "Poll report job status."
+          }
+        },
+        {
+          "name": "Download",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": {
+              "raw": "{{baseUrl}}/jobs/{{jobId}}/download",
+              "host": ["{{baseUrl}}"],
+              "path": ["jobs", "{{jobId}}", "download"]
+            },
+            "description": "Downloads the completed report file (csv or xlsx)."
+          }
+        }
+      ]
+    }
+  ]
+}

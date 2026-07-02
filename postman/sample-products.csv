@@ -1,0 +1,136 @@
+name,price,categoryUniqueId
+iPhone 15 Pro Max 256GB,1199.00,CAT-PHONES
+iPhone 15 Pro 128GB,999.00,CAT-PHONES
+iPhone 15 Plus,899.00,CAT-PHONES
+iPhone 15,799.00,CAT-PHONES
+iPhone 14 128GB,699.00,CAT-PHONES
+Samsung Galaxy S24 Ultra,1299.99,CAT-PHONES
+Samsung Galaxy S24+,999.99,CAT-PHONES
+Samsung Galaxy S24,799.99,CAT-PHONES
+Samsung Galaxy Z Fold 5,1799.00,CAT-PHONES
+Samsung Galaxy Z Flip 5,999.00,CAT-PHONES
+Google Pixel 8 Pro,899.00,CAT-PHONES
+Google Pixel 8,699.00,CAT-PHONES
+Google Pixel 7a,499.00,CAT-PHONES
+OnePlus 12 256GB,799.99,CAT-PHONES
+OnePlus Nord 3,449.00,CAT-PHONES
+Xiaomi 14 Pro,899.00,CAT-PHONES
+Xiaomi Redmi Note 13 Pro,349.00,CAT-PHONES
+Nothing Phone 2,599.00,CAT-PHONES
+Motorola Edge 40,499.00,CAT-PHONES
+Sony Xperia 1 V,1399.00,CAT-PHONES
+MacBook Pro 16" M3 Max,3499.00,CAT-LAPTOP
+MacBook Pro 14" M3 Pro,1999.00,CAT-LAPTOP
+MacBook Air 15" M2,1299.00,CAT-LAPTOP
+MacBook Air 13" M2,1099.00,CAT-LAPTOP
+Dell XPS 15 OLED,2199.00,CAT-LAPTOP
+Dell XPS 13 Plus,1499.00,CAT-LAPTOP
+Dell Inspiron 14,799.00,CAT-LAPTOP
+Lenovo ThinkPad X1 Carbon Gen 11,1899.00,CAT-LAPTOP
+Lenovo Yoga Slim 7i,1199.00,CAT-LAPTOP
+Lenovo Legion Pro 7i,2499.00,CAT-LAPTOP
+HP Spectre x360 14,1599.00,CAT-LAPTOP
+HP Envy 16,1299.00,CAT-LAPTOP
+HP Pavilion 15,749.00,CAT-LAPTOP
+ASUS ROG Zephyrus G14,1799.00,CAT-LAPTOP
+ASUS ZenBook 14 OLED,1099.00,CAT-LAPTOP
+Acer Swift Go 14,899.00,CAT-LAPTOP
+Acer Predator Helios 16,2199.00,CAT-LAPTOP
+Microsoft Surface Laptop 5,1299.00,CAT-LAPTOP
+Razer Blade 15,2499.00,CAT-LAPTOP
+Framework Laptop 13,1399.00,CAT-LAPTOP
+Logitech MX Master 3S Mouse,99.99,CAT-ACCESS
+Logitech MX Keys S Keyboard,109.99,CAT-ACCESS
+Logitech G Pro X Superlight,149.00,CAT-ACCESS
+Apple Magic Mouse,99.00,CAT-ACCESS
+Apple Magic Keyboard,129.00,CAT-ACCESS
+Keychron K2 Wireless Mechanical,89.99,CAT-ACCESS
+Keychron Q1 Pro,199.00,CAT-ACCESS
+Razer DeathAdder V3 Pro,159.99,CAT-ACCESS
+Razer BlackWidow V4 Pro,229.99,CAT-ACCESS
+Anker 737 Power Bank 24000mAh,149.99,CAT-ACCESS
+Anker USB-C Hub 7-in-1,49.99,CAT-ACCESS
+CalDigit TS4 Thunderbolt Dock,399.00,CAT-ACCESS
+Belkin BoostCharge 3-in-1,149.95,CAT-ACCESS
+UGREEN 100W GaN Charger,59.99,CAT-ACCESS
+Rain Design mStand Laptop Stand,49.99,CAT-ACCESS
+Twelve South BookArc Stand,59.99,CAT-ACCESS
+Blue Yeti X Microphone,169.99,CAT-ACCESS
+Elgato Stream Deck MK.2,149.99,CAT-ACCESS
+Elgato Key Light Air,129.99,CAT-ACCESS
+Satechi USB-C Multiport Adapter,89.99,CAT-ACCESS
+LG UltraFine 27" 4K Monitor,699.00,CAT-DISPLAY
+LG UltraGear 32GP850 QHD 165Hz,449.00,CAT-DISPLAY
+LG DualUp 28MQ780,699.00,CAT-DISPLAY
+Dell UltraSharp U2723QE 4K,619.00,CAT-DISPLAY
+Dell U3423WE 34" Curved,899.00,CAT-DISPLAY
+Samsung Odyssey G9 49",1499.00,CAT-DISPLAY
+Samsung Odyssey OLED G8,1299.00,CAT-DISPLAY
+Samsung ViewFinity S9 5K,1599.00,CAT-DISPLAY
+ASUS ProArt PA278CV,399.00,CAT-DISPLAY
+ASUS ROG Swift OLED PG27AQDM,999.00,CAT-DISPLAY
+BenQ PD3220U Designer,1199.00,CAT-DISPLAY
+Gigabyte M32U 4K 144Hz,699.00,CAT-DISPLAY
+Alienware AW3423DWF QD-OLED,1099.00,CAT-DISPLAY
+Apple Studio Display 27",1599.00,CAT-DISPLAY
+Apple Pro Display XDR,4999.00,CAT-DISPLAY
+Sony AirPods Pro 2nd Gen,249.00,CAT-AUDIO
+Apple AirPods Max,549.00,CAT-AUDIO
+Sony WH-1000XM5,399.99,CAT-AUDIO
+Sony WF-1000XM5,299.99,CAT-AUDIO
+Bose QuietComfort Ultra Headphones,429.00,CAT-AUDIO
+Bose QuietComfort Earbuds II,299.00,CAT-AUDIO
+Sennheiser Momentum 4 Wireless,379.95,CAT-AUDIO
+Sennheiser HD 660S2,599.95,CAT-AUDIO
+Beats Studio Pro,349.99,CAT-AUDIO
+Jabra Elite 10,249.99,CAT-AUDIO
+Marshall Woburn III Speaker,579.00,CAT-AUDIO
+Sonos Era 300,449.00,CAT-AUDIO
+Sonos Move 2,449.00,CAT-AUDIO
+JBL Flip 6,129.95,CAT-AUDIO
+Bang & Olufsen Beoplay H95,899.00,CAT-AUDIO
+iPad Pro 12.9" M2 256GB,1099.00,CAT-TABLET
+iPad Pro 11" M2 128GB,799.00,CAT-TABLET
+iPad Air 11" M2,599.00,CAT-TABLET
+iPad 10th Gen,449.00,CAT-TABLET
+iPad Mini 6,499.00,CAT-TABLET
+Samsung Galaxy Tab S9 Ultra,1199.99,CAT-TABLET
+Samsung Galaxy Tab S9+,999.99,CAT-TABLET
+Samsung Galaxy Tab S9 FE,449.99,CAT-TABLET
+Microsoft Surface Pro 9,999.00,CAT-TABLET
+Microsoft Surface Go 4,579.00,CAT-TABLET
+Lenovo Tab P12 Pro,699.00,CAT-TABLET
+Amazon Fire HD 10,149.99,CAT-TABLET
+Xiaomi Pad 6,399.00,CAT-TABLET
+Google Pixel Tablet,499.00,CAT-TABLET
+Apple Pencil Pro,129.00,CAT-TABLET
+Apple Watch Ultra 2,799.00,CAT-WEAR
+Apple Watch Series 9 45mm,429.00,CAT-WEAR
+Apple Watch SE 44mm,279.00,CAT-WEAR
+Samsung Galaxy Watch 6 Classic,399.99,CAT-WEAR
+Samsung Galaxy Watch 6,299.99,CAT-WEAR
+Garmin Fenix 7 Pro Solar,899.99,CAT-WEAR
+Garmin Forerunner 965,599.99,CAT-WEAR
+Garmin Venu 3,449.99,CAT-WEAR
+Fitbit Charge 6,159.95,CAT-WEAR
+Fitbit Sense 2,299.95,CAT-WEAR
+Google Pixel Watch 2,349.00,CAT-WEAR
+Whoop 4.0 Band,239.00,CAT-WEAR
+Oura Ring Gen 3,299.00,CAT-WEAR
+Polar Vantage V3,599.95,CAT-WEAR
+Amazfit GTR 4,199.99,CAT-WEAR
+PlayStation 5 Slim,499.99,CAT-GAMING
+PlayStation 5 Pro,699.99,CAT-GAMING
+Xbox Series X 1TB,499.99,CAT-GAMING
+Xbox Series S 512GB,299.99,CAT-GAMING
+Nintendo Switch OLED,349.99,CAT-GAMING
+Steam Deck OLED 512GB,549.00,CAT-GAMING
+ASUS ROG Ally Z1 Extreme,699.99,CAT-GAMING
+Meta Quest 3 128GB,499.99,CAT-GAMING
+Meta Quest 3 512GB,649.99,CAT-GAMING
+DualSense Edge Controller,199.99,CAT-GAMING
+Xbox Elite Series 2 Controller,179.99,CAT-GAMING
+Nintendo Switch Pro Controller,69.99,CAT-GAMING
+Razer Kishi V2 Mobile Controller,99.99,CAT-GAMING
+Logitech G Cloud Gaming Handheld,349.99,CAT-GAMING
+8BitDo Ultimate Controller,69.99,CAT-GAMING
